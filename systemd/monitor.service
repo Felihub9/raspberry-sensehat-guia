@@ -1,0 +1,28 @@
+[Unit]
+Description=Monitor de Temperatura i Humitat (Sense HAT)
+After=multi-user.target
+Wants=multi-user.target
+# No et rendeixis encara que hi hagi molts reinicis seguits
+# (per exemple si l'I2C triga a estar llest despres d'arrencar).
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/home/pi
+ExecStart=/usr/bin/python3 /home/pi/monitor.py
+
+# Sense aixo, Python guarda la sortida en un buffer i els missatges
+# no apareixen al journal fins molt despres (o mai).
+Environment=PYTHONUNBUFFERED=1
+
+# Reinicia SEMPRE: si el proces acaba per qualsevol motiu,
+# systemd el torna a aixecar al cap de 10 segons.
+Restart=always
+RestartSec=10
+
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

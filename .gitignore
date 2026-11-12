@@ -1,0 +1,7 @@
+# Bases de dades i còpies: són dades pròpies del dispositiu, no es pugen
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+__pycache__/
+*.pyc

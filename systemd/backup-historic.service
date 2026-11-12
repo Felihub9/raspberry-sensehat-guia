@@ -1,0 +1,7 @@
+[Unit]
+Description=Copia incremental de historic.db al USB
+
+[Service]
+Type=oneshot
+User=pi
+ExecStart=/usr/bin/python3 /home/pi/backup_historic.py
